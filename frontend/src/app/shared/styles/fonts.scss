@@ -1,0 +1,27 @@
+@import "./colors.scss";
+
+@mixin input-base($font-size, $font-weight: 400) {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: $font-weight;
+  font-size: $font-size;
+  line-height: 140%;
+  color: $_black;
+}
+
+.input-body {
+  @include input-base(16px);
+}
+
+.label-body-14 {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  color: $_black;
+}
+
+.label-body-12 {
+  @include input-base(12px);
+}
