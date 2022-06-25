@@ -1,0 +1,9 @@
+<div class="container">
+  <form [formGroup]="dataFormGroup">
+    <input-field
+      labelText="Test label field"
+      formControlName="test"
+    ></input-field>
+    <button (click)="getValue()">Get value</button>
+  </form>
+</div>

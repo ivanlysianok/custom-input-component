@@ -1,0 +1,9 @@
+<div class="d-flex flex-column">
+  <label for="input-field" *ngIf="labelText">{{ labelText }}</label>
+  <input
+    [type]="inputType"
+    [placeholder]="placeholderText"
+    name="input-field"
+  />
+  <span>{{ hintText }}</span>
+</div>
