@@ -1,1 +1,41 @@
+@import "../../../../../shared/styles/base.scss";
 
+.label {
+  @include set-font($_label-size, 500, $_black);
+}
+
+input {
+  outline: none;
+  border: none;
+  &::placeholder {
+    @include set-font($_input-size, 400, $_black-600);
+  }
+}
+
+.input-container {
+  border: 1px solid $_black-200;
+  border-radius: 8px;
+  padding: 13px 16px;
+  @include set-font($_input-size, 500, $_black);
+  &:focus-within {
+    border: 1px solid $_purple;
+    box-shadow: 0px 0px 0px 3px $_purple-200;
+  }
+}
+
+.input {
+  font-size: $_input-size;
+  font-weight: 500;
+}
+
+.input-hint {
+  @include set-font($_add-text-size, 400, $_black-600);
+}
+
+.email-icon {
+  @include set-size(20px, 16px);
+}
+
+.phone-icon {
+  @include set-size(20px, 20px);
+}

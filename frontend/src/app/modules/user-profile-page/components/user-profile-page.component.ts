@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'user-profile-page',
@@ -10,11 +10,23 @@ export class UserProfilePageComponent {
   public dataFormGroup: FormGroup;
   constructor(private formBuilder: FormBuilder) {
     this.dataFormGroup = this.formBuilder.group({
-      test: [],
+      email: [null, Validators.email],
     });
   }
 
   getValue(): void {
     console.log(this.dataFormGroup.value);
+  }
+
+  setDisabledState(): void {
+    this.dataFormGroup.disable();
+  }
+
+  setEnableState(): void {
+    this.dataFormGroup.enable();
+  }
+
+  patchValue(): void {
+    this.dataFormGroup.controls['test'].patchValue('Ivan Lysianok');
   }
 }

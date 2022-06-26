@@ -1,0 +1,19 @@
+@import "../../../../node_modules//bootstrap/scss/bootstrap.scss";
+
+// Flex
+
+.in-row {
+  @extend .d-flex;
+  @extend .align-items-center;
+}
+
+.in-column {
+  @extend .d-flex;
+  @extend .flex-column;
+}
+
+.in-row-centered {
+  @extend .d-flex;
+  @extend .align-items-center;
+  @extend .justify-content-center;
+}

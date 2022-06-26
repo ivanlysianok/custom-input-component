@@ -1,0 +1,21 @@
+@import "./sizings.scss";
+@import "./colors.scss";
+
+@mixin set-font($size, $weight, $color) {
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+}
+
+@mixin set-size($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+.disabled {
+  color: $_black-400 !important;
+}
+
+.disabled-bg {
+  background-color: $_black-20 !important;
+}

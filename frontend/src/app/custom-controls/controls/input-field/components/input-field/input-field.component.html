@@ -1,9 +1,34 @@
-<div class="d-flex flex-column">
-  <label for="input-field" *ngIf="labelText">{{ labelText }}</label>
-  <input
-    [type]="inputType"
-    [placeholder]="placeholderText"
-    name="input-field"
-  />
-  <span>{{ hintText }}</span>
+<div>
+  <label class="label in-column" [ngClass]="{ disabled: isDisabled }">
+    {{ labelText }}
+    <div class="input-container mt-2" [ngClass]="{ 'disabled-bg': isDisabled }">
+      <img
+        *ngIf="inputType"
+        [src]="getImagePath(inputType)"
+        class="me-2"
+        [ngClass]="{
+          'opacity-50': isDisabled,
+          'email-icon': inputType === 'email',
+          'phone-icon': inputType === 'phone'
+        }"
+      />
+      <input
+        #inputReference
+        type="text"
+        class="input"
+        [placeholder]="placeholderText"
+        [ngClass]="{ disabled: isDisabled }"
+        (input)="onValueChange()"
+      />
+    </div>
+  </label>
+  <span
+    class="mt-2 input-hint"
+    [ngClass]="{ disabled: isDisabled }"
+    *ngIf="hintText"
+    >{{ hintText }}</span
+  >
+  <div *ngIf="(control?.touched || control?.dirty) && control?.invalid">
+    Invalid
+  </div>
 </div>
