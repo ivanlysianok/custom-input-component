@@ -3,7 +3,6 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  HostListener,
   Injector,
   Input,
   Renderer2,
@@ -37,7 +36,9 @@ export class InputFieldComponent
   @Input() inputType: InputType | undefined;
   @Input() placeholderText: string = '';
   @Input() hintText: string = '';
-  @Input() disabled = false;
+  @Input() set disabled(value: boolean) {
+    this.setDisabledState(value);
+  }
 
   @ViewChild('inputReference')
   input: ElementRef | null = null;
@@ -48,6 +49,7 @@ export class InputFieldComponent
   public value: string | null = null;
   public onChange = (value: any) => {};
   public onTouched = () => {};
+  public imageSource = '';
 
   constructor(
     private renderer: Renderer2,
@@ -56,13 +58,15 @@ export class InputFieldComponent
   ) {}
 
   ngAfterViewInit(): void {
-    // TODO - Implement error state
-    //  TODO - Implement Validation
+    // TODO - disabled state background chagnes to white
+    // TODO - implement nubmer validation if inputType is number
+    // TODO - implement custom error message
     const ngControl: NgControl | null = this.injector.get(NgControl, null);
     if (ngControl) {
       this.control = ngControl.control as FormControl;
-      this.changeDetector.detectChanges();
     }
+    this.imageSource = `assets/images/${this.inputType}.svg`;
+    this.changeDetector.detectChanges();
   }
 
   writeValue(obj: any): void {
@@ -83,25 +87,15 @@ export class InputFieldComponent
     this.isDisabled = isDisabled;
   }
 
-  getImagePath(type: InputType | undefined): string | null {
-    if (!type) {
-      return null;
-    }
-    let path = '../../../../../../assets/images/{type}.svg';
-    if (type === this.INPUT_TYPE.Email) {
-      path = path.replace('{type}', this.INPUT_TYPE.Email);
-    }
-    if (type === this.INPUT_TYPE.Phone) {
-      path = path.replace('{type}', this.INPUT_TYPE.Phone);
-    }
-    return path;
-  }
-
-  onValueChange() {
+  onValueChange(): void {
     if (!this.input) {
       return;
     }
     this.value = this.input.nativeElement.value;
     this.onChange(this.value);
+  }
+
+  onFocusOut(): void {
+    this.onTouched();
   }
 }

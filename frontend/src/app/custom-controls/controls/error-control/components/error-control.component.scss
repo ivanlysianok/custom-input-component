@@ -1,0 +1,11 @@
+@import "../../../../shared/styles/base.scss";
+
+.error-message {
+  @include set-font($_add-text-size, 500, $_red);
+}
+
+.error-icon {
+  @include set-size(13px, 13px);
+  filter: invert(12%) sepia(81%) saturate(7151%) hue-rotate(4deg)
+    brightness(86%) contrast(115%);
+}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -10,12 +10,12 @@ export class UserProfilePageComponent {
   public dataFormGroup: FormGroup;
   constructor(private formBuilder: FormBuilder) {
     this.dataFormGroup = this.formBuilder.group({
-      email: [null, Validators.email],
+      email: [null, [Validators.email, Validators.minLength(5)]],
     });
   }
 
   getValue(): void {
-    console.log(this.dataFormGroup.value);
+    console.log(this.dataFormGroup.controls['email'].touched);
   }
 
   setDisabledState(): void {
@@ -28,5 +28,13 @@ export class UserProfilePageComponent {
 
   patchValue(): void {
     this.dataFormGroup.controls['test'].patchValue('Ivan Lysianok');
+  }
+
+  addValidators(): void {
+    this.dataFormGroup.get('email')?.addValidators(Validators.required);
+  }
+
+  hasValidators(): void {
+    //
   }
 }

@@ -1,10 +1,16 @@
-<div>
+<div [ngClass]="{ 'pe-none': isDisabled }">
   <label class="label in-column" [ngClass]="{ disabled: isDisabled }">
     {{ labelText }}
-    <div class="input-container mt-2" [ngClass]="{ 'disabled-bg': isDisabled }">
+    <div
+      class="input-container in-row mt-2"
+      [ngClass]="{
+        'disabled-bg': isDisabled,
+        'error-bg': (control?.touched || control?.dirty) && control?.invalid
+      }"
+    >
       <img
         *ngIf="inputType"
-        [src]="getImagePath(inputType)"
+        [src]="imageSource"
         class="me-2"
         [ngClass]="{
           'opacity-50': isDisabled,
@@ -19,6 +25,7 @@
         [placeholder]="placeholderText"
         [ngClass]="{ disabled: isDisabled }"
         (input)="onValueChange()"
+        (focusout)="onFocusOut()"
       />
     </div>
   </label>
@@ -28,7 +35,5 @@
     *ngIf="hintText"
     >{{ hintText }}</span
   >
-  <div *ngIf="(control?.touched || control?.dirty) && control?.invalid">
-    Invalid
-  </div>
+  <error-control [errors]="control?.errors"></error-control>
 </div>
