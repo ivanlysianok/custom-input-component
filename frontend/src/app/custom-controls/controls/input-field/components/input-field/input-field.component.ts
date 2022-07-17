@@ -3,7 +3,6 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  Injector,
   Input,
   Renderer2,
   ViewChild,
@@ -11,8 +10,8 @@ import {
 import {
   ControlValueAccessor,
   FormControl,
-  NgControl,
   NG_VALUE_ACCESSOR,
+  Validators,
 } from '@angular/forms';
 import { INPUT_TYPE } from '../../models/input-type.enum';
 import { InputType } from '../../models/input-type.type';
@@ -32,10 +31,10 @@ import { InputType } from '../../models/input-type.type';
 export class InputFieldComponent
   implements ControlValueAccessor, AfterViewInit
 {
+  @Input() formControl: FormControl | null = null;
   @Input() labelText: string | undefined;
   @Input() inputType: InputType | undefined;
   @Input() placeholderText: string = '';
-  @Input() hintText: string = '';
   @Input() set disabled(value: boolean) {
     this.setDisabledState(value);
   }
@@ -45,7 +44,6 @@ export class InputFieldComponent
 
   public INPUT_TYPE = INPUT_TYPE;
   public isDisabled = false;
-  public control: FormControl | null = null;
   public value: string | null = null;
   public onChange = (value: any) => {};
   public onTouched = () => {};
@@ -53,18 +51,15 @@ export class InputFieldComponent
 
   constructor(
     private renderer: Renderer2,
-    private injector: Injector,
     private changeDetector: ChangeDetectorRef
   ) {}
 
   ngAfterViewInit(): void {
     // TODO - disabled state background chagnes to white
     // TODO - implement nubmer validation if inputType is number
-    // TODO - implement custom error message
-    const ngControl: NgControl | null = this.injector.get(NgControl, null);
-    if (ngControl) {
-      this.control = ngControl.control as FormControl;
-    }
+    // TODO - implement email validation if inputType is email
+    // TODO - Check responsivness
+    // TODO - Finalize code, refactor if it will be possible
     this.imageSource = `assets/images/${this.inputType}.svg`;
     this.changeDetector.detectChanges();
   }

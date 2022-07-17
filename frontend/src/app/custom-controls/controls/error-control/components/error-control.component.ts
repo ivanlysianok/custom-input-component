@@ -1,7 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
-import { BuiltInErrorsCollection } from '../constants/built-in-errors.constant';
-import { ErrorMessage } from '../models/error-message.interface';
+import { ControlError } from '../models/control-error.interface';
 
 @Component({
   selector: 'error-control',
@@ -10,18 +9,62 @@ import { ErrorMessage } from '../models/error-message.interface';
 })
 export class ErrorControlComponent implements OnChanges {
   @Input() errors: ValidationErrors | null | undefined;
-  public controlErrorsCollection: ErrorMessage[] = [];
+  public displayedErrors: ControlError[] = [];
 
   ngOnChanges(): void {
-    this.controlErrorsCollection = [];
+    this.displayedErrors = [];
     if (!this.errors) {
       return;
     }
-    const errorKeys = Object.keys(this.errors);
-    BuiltInErrorsCollection.forEach((item) => {
-      if (errorKeys.includes(item.errorKey)) {
-        this.controlErrorsCollection.push(item);
+    for (let err in this.errors) {
+      if (err === 'required') {
+        this.addError(err, `This field is required`);
       }
+      if (err === 'requiredTrue') {
+        this.addError(err, `This field is requires true value`);
+      }
+      if (err === 'minlength') {
+        this.addError(
+          err,
+          `The minimum length of field should be ${this.errors[err].requiredLength}`
+        );
+      }
+      if (err === 'maxlength') {
+        this.addError(
+          err,
+          `The maximum length of field should be ${this.errors[err].requiredLength}`
+        );
+      }
+      if (err === 'min') {
+        this.addError(
+          err,
+          `The maximum length of field should be ${this.errors[err].min}`
+        );
+      }
+      if (err === 'max') {
+        this.addError(
+          err,
+          `The maximum length of field should be ${this.errors[err].max}`
+        );
+      }
+      if (err === 'email') {
+        this.addError(
+          err,
+          `Fill this field in format: namesurname@example.com`
+        );
+      }
+    }
+  }
+
+  /**
+   * Add error to displayErrors collection
+   * @param errorKey Error Key
+   * @param message Error message
+   */
+  addError(errorKey: string, message: string): void {
+    this.displayedErrors.push({
+      errorKey: errorKey,
+      message: message,
     });
   }
 }

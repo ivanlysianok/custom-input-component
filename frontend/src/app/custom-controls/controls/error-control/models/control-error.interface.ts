@@ -1,4 +1,4 @@
-export interface ErrorMessage {
+export interface ControlError {
   errorKey: string;
   message: string;
 }

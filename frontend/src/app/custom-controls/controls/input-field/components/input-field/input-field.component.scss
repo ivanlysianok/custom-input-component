@@ -33,10 +33,6 @@ input {
   width: 100%;
 }
 
-.input-hint {
-  @include set-font($_add-text-size, 400, $_black-600);
-}
-
 .email-icon {
   @include set-size(20px, 16px);
 }

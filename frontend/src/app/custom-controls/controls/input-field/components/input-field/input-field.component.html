@@ -5,7 +5,8 @@
       class="input-container in-row mt-2"
       [ngClass]="{
         'disabled-bg': isDisabled,
-        'error-bg': (control?.touched || control?.dirty) && control?.invalid
+        'error-bg':
+          (formControl?.touched || formControl?.dirty) && formControl?.errors
       }"
     >
       <img
@@ -29,11 +30,8 @@
       />
     </div>
   </label>
-  <span
-    class="mt-2 input-hint"
-    [ngClass]="{ disabled: isDisabled }"
-    *ngIf="hintText"
-    >{{ hintText }}</span
-  >
-  <error-control [errors]="control?.errors"></error-control>
+  <error-control
+    *ngIf="formControl?.touched || formControl?.dirty"
+    [errors]="formControl?.errors"
+  ></error-control>
 </div>

@@ -4,6 +4,8 @@
       labelText="User email"
       placeholderText="Type here your name"
       formControlName="email"
+      inputType="email"
+      [formControl]="getControl(dataFormGroup.get('email'))"
     ></input-field>
     <button (click)="getValue()">Get value</button>
     <button (click)="setDisabledState()">Set disable state</button>
