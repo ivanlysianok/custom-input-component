@@ -7,15 +7,6 @@
   color: $color;
 }
 
-@mixin set-size($width, $height) {
-  width: $width;
-  height: $height;
-}
-
 .disabled {
   color: $_black-400 !important;
-}
-
-.disabled-bg {
-  background-color: $_black-20 !important;
 }

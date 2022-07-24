@@ -3,15 +3,14 @@
     <input-field
       labelText="User email"
       placeholderText="Type here your name"
-      formControlName="email"
       inputType="email"
+      formControlName="email"
       [formControl]="getControl(dataFormGroup.get('email'))"
     ></input-field>
     <button (click)="getValue()">Get value</button>
+    <button (click)="resetValue()">Reset value</button>
     <button (click)="setDisabledState()">Set disable state</button>
     <button (click)="setEnableState()">Set enable state</button>
     <button (click)="patchValue()">Patch value</button>
-    <button (click)="addValidators()">Add Validators</button>
-    <button (click)="hasValidators()">Has Validators</button>
   </form>
 </div>

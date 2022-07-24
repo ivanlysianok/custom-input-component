@@ -28,15 +28,16 @@ input {
 }
 
 .input {
-  font-size: $_input-size;
-  font-weight: 500;
+  @include set-font($_input-size, 500, $_black);
   width: 100%;
 }
 
 .email-icon {
-  @include set-size(20px, 16px);
+  width: 20px;
+  height: 16px;
 }
 
 .phone-icon {
-  @include set-size(20px, 20px);
+  width: 20px;
+  height: 20px;
 }

@@ -21,7 +21,7 @@ export class ErrorControlComponent implements OnChanges {
         this.addError(err, `This field is required`);
       }
       if (err === 'requiredTrue') {
-        this.addError(err, `This field is requires true value`);
+        this.addError(err, `This field requires true value`);
       }
       if (err === 'minlength') {
         this.addError(
@@ -38,7 +38,7 @@ export class ErrorControlComponent implements OnChanges {
       if (err === 'min') {
         this.addError(
           err,
-          `The maximum length of field should be ${this.errors[err].min}`
+          `The minimum length of field should be ${this.errors[err].min}`
         );
       }
       if (err === 'max') {
@@ -53,14 +53,12 @@ export class ErrorControlComponent implements OnChanges {
           `Fill this field in format: namesurname@example.com`
         );
       }
+      if (err === 'pattern') {
+        this.addError(err, `This field does not meet some requirements`);
+      }
     }
   }
 
-  /**
-   * Add error to displayErrors collection
-   * @param errorKey Error Key
-   * @param message Error message
-   */
   addError(errorKey: string, message: string): void {
     this.displayedErrors.push({
       errorKey: errorKey,

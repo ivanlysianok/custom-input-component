@@ -20,10 +20,7 @@ export class UserProfilePageComponent {
   public getControl = getControl;
   constructor(private formBuilder: FormBuilder) {
     this.dataFormGroup = this.formBuilder.group({
-      email: [
-        null,
-        [Validators.minLength(4), Validators.maxLength(7), Validators.required],
-      ],
+      email: [null, [Validators.required]],
     });
   }
 
@@ -41,6 +38,10 @@ export class UserProfilePageComponent {
 
   patchValue(): void {
     this.dataFormGroup.controls['email'].patchValue('Ivan Lysianok');
+  }
+
+  resetValue(): void {
+    this.dataFormGroup.controls['email'].reset();
   }
 
   addValidators(): void {

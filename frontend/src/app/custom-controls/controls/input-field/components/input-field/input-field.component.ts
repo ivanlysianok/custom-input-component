@@ -55,12 +55,11 @@ export class InputFieldComponent
   ) {}
 
   ngAfterViewInit(): void {
-    // TODO - disabled state background chagnes to white
-    // TODO - implement nubmer validation if inputType is number
-    // TODO - implement email validation if inputType is email
-    // TODO - Check responsivness
-    // TODO - Finalize code, refactor if it will be possible
+    if (this.inputType === 'email') {
+      this.formControl?.addValidators(Validators.email);
+    }
     this.imageSource = `assets/images/${this.inputType}.svg`;
+    this.setInputType();
     this.changeDetector.detectChanges();
   }
 
@@ -92,5 +91,21 @@ export class InputFieldComponent
 
   onFocusOut(): void {
     this.onTouched();
+  }
+
+  setInputType(): void {
+    if (!this.input || !this.inputType) {
+      return;
+    }
+    switch (this.inputType) {
+      case 'email':
+        this.input.nativeElement.type = 'email';
+        break;
+      case 'phone':
+        this.input.nativeElement.type = 'number';
+        break;
+      default:
+        this.input.nativeElement.type = 'text';
+    }
   }
 }

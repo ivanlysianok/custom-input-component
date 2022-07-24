@@ -4,13 +4,12 @@
     <div
       class="input-container in-row mt-2"
       [ngClass]="{
-        'disabled-bg': isDisabled,
         'error-bg':
           (formControl?.touched || formControl?.dirty) && formControl?.errors
       }"
     >
       <img
-        *ngIf="inputType"
+        *ngIf="inputType === 'email' || inputType === 'phone'"
         [src]="imageSource"
         class="me-2"
         [ngClass]="{
@@ -21,10 +20,9 @@
       />
       <input
         #inputReference
-        type="text"
         class="input"
-        [placeholder]="placeholderText"
         [ngClass]="{ disabled: isDisabled }"
+        [placeholder]="placeholderText"
         (input)="onValueChange()"
         (focusout)="onFocusOut()"
       />
