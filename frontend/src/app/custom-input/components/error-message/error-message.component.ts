@@ -1,22 +1,23 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
-import { ControlError } from '../models/control-error.interface';
+import { Errors } from '../../models/errors.interface';
 
 @Component({
-  selector: 'error-control',
-  templateUrl: './error-control.component.html',
-  styleUrls: ['./error-control.component.scss'],
+  selector: 'error-message',
+  templateUrl: './error-message.component.html',
+  styleUrls: ['./error-message.component.scss'],
 })
-export class ErrorControlComponent implements OnChanges {
-  @Input() errors: ValidationErrors | null | undefined;
-  public displayedErrors: ControlError[] = [];
+export class ErrorMessageComponent implements OnChanges {
+  @Input() validationErrors: ValidationErrors | null | undefined;
+
+  public errors: Errors[] = [];
 
   ngOnChanges(): void {
-    this.displayedErrors = [];
-    if (!this.errors) {
+    this.errors = [];
+    if (!this.validationErrors) {
       return;
     }
-    for (let err in this.errors) {
+    for (let err in this.validationErrors) {
       if (err === 'required') {
         this.addError(err, `This field is required`);
       }
@@ -26,25 +27,25 @@ export class ErrorControlComponent implements OnChanges {
       if (err === 'minlength') {
         this.addError(
           err,
-          `The minimum length of field should be ${this.errors[err].requiredLength}`
+          `The minimum length of field should be ${this.validationErrors[err].requiredLength}`
         );
       }
       if (err === 'maxlength') {
         this.addError(
           err,
-          `The maximum length of field should be ${this.errors[err].requiredLength}`
+          `The maximum length of field should be ${this.validationErrors[err].requiredLength}`
         );
       }
       if (err === 'min') {
         this.addError(
           err,
-          `The minimum length of field should be ${this.errors[err].min}`
+          `The minimum length of field should be ${this.validationErrors[err].min}`
         );
       }
       if (err === 'max') {
         this.addError(
           err,
-          `The maximum length of field should be ${this.errors[err].max}`
+          `The maximum length of field should be ${this.validationErrors[err].max}`
         );
       }
       if (err === 'email') {
@@ -60,8 +61,8 @@ export class ErrorControlComponent implements OnChanges {
   }
 
   addError(errorKey: string, message: string): void {
-    this.displayedErrors.push({
-      errorKey: errorKey,
+    this.errors.push({
+      key: errorKey,
       message: message,
     });
   }

@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>Hello</h1>
+  <form [formGroup]="demoGroup">
+    <custom-input
+      labelText="Demo field"
+      placeholderText="Type here your data"
+      formControlName="demoField"
+    ></custom-input>
+    <button class="btn btn-primary" (click)="getValue()">Get value</button>
+  </form>
+</div>

@@ -1,0 +1,12 @@
+<label class="label in-column">
+  <div>
+    {{ text }}
+    <span
+      requiredSymbol
+      [isDisabled]="isDisabled"
+      [isRequired]="isRequired"
+      [hasRequiredValidator]="hasRequiredValidator"
+    ></span>
+  </div>
+  <ng-content></ng-content>
+</label>

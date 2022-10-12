@@ -1,4 +1,4 @@
-@import "../../../../shared/styles/base.scss";
+@import "../../../shared/styles/base.scss";
 
 .error-message {
   @include set-font($_add-text-size, 500, $_red);

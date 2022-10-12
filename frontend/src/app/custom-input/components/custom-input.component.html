@@ -1,0 +1,44 @@
+<div [ngClass]="{ 'pe-none': isDisabled }">
+  <label-field
+    [text]="labelText"
+    [isRequired]="isRequired"
+    [isDisabled]="isDisabled"
+    [hasRequiredValidator]="hasRequiredValidator()"
+  >
+    <div
+      class="input-container in-row mt-2"
+      [ngClass]="{
+        'error-bg':
+          (ngControl.control?.touched || ngControl.control?.dirty) &&
+          ngControl.control?.errors
+      }"
+    >
+      <ng-container
+        *ngIf="inputType === 'email' || inputType === 'number'"
+        class="me-2"
+      >
+        <img
+          [src]="'assets/images/' + inputType + '.svg'"
+          [ngClass]="{
+            'opacity-50': isDisabled,
+            'email-icon': inputType === 'email',
+            'phone-icon': inputType === 'number'
+          }"
+        />
+      </ng-container>
+      <input
+        #input
+        class="input"
+        [ngClass]="{ disabled: isDisabled }"
+        [placeholder]="placeholderText"
+        [type]="inputType"
+        (input)="onValueChange()"
+        (focusout)="onFocusOut()"
+      />
+    </div>
+  </label-field>
+  <error-message
+    *ngIf="ngControl.control?.touched || ngControl.control?.dirty"
+    [validationErrors]="ngControl.control?.errors"
+  ></error-message>
+</div>

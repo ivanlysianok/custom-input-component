@@ -1,0 +1,13 @@
+@import "../../../shared/styles/base.scss";
+
+.label {
+  @include set-font($_label-size, 500, $_black);
+}
+
+.required {
+  &::after {
+    content: "*";
+    color: $_red;
+    font-size: $_label-size;
+  }
+}
