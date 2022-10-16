@@ -1,9 +1,0 @@
-$_add-text-size: 12px;
-$_label-size: 14px;
-$_input-size: 16px;
-
-@mixin set-font($size, $weight, $color) {
-  font-size: $size;
-  font-weight: $weight;
-  color: $color;
-}

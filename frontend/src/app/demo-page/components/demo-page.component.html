@@ -1,7 +1,7 @@
 <div class="container my-4">
   <h1>Custom form input component</h1>
   <p>
-    This demo lets you preview the form input component, its variations, options
+    This demo lets you preview custom input component, its variations, options
     and different states.
   </p>
   <div class="card mb-4">
@@ -73,7 +73,7 @@
       <form [formGroup]="formGroup6">
         <custom-input
           formControlName="formField"
-          placeholderText="This input is in disabled state"
+          placeholderText="This input is disabled"
           labelText="Input label"
         ></custom-input>
       </form>
@@ -94,7 +94,13 @@
 
   <div class="card mb-4">
     <div class="card-body">
-      <h6 class="card-title mb-2">Invalid - built in errors</h6>
+      <h6 class="card-title mb-2">Invalid - predefined messages</h6>
+      <p>
+        There is set of predefined error messages which are displayed depending
+        on validation error. In this example you can see minLength error
+        message. Messages are prepared for required, requiredTrue, min, max,
+        minLenghth, maxLength, email and pattern validation errors.
+      </p>
       <form [formGroup]="formGroup8">
         <custom-input
           formControlName="formField"
@@ -108,6 +114,7 @@
   <div class="card mb-4">
     <div class="card-body">
       <h6 class="card-title mb-2">Invalid - custom message</h6>
+      <p>There is possibility to set your own custom error message.</p>
       <form [formGroup]="formGroup9">
         <custom-input
           formControlName="formField"

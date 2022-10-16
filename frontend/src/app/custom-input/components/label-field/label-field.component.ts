@@ -11,7 +11,7 @@ export class LabelFieldComponent {
    */
   @Input() text = '';
   /**
-   * Flag which allows set required state manually and display required symbol (*)
+   * Flag which allows display required symbol (*) manually
    */
   @Input() isRequired?: boolean;
   /**

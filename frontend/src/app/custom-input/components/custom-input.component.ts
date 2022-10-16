@@ -27,7 +27,7 @@ export class CustomInputComponent implements ControlValueAccessor {
    */
   @Input() placeholderText: string = '';
   /**
-   * Flag which allows set required state manually and display required symbol (*)
+   * Flag which allows display required symbol (*) manually
    */
   @Input() isRequired?: boolean;
   /**

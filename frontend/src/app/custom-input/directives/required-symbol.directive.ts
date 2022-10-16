@@ -1,22 +1,23 @@
-import { DOCUMENT } from '@angular/common';
-import {
-  Directive,
-  ElementRef,
-  Inject,
-  Input,
-  OnChanges,
-  Renderer2,
-} from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
 
 @Directive({
   selector: '[requiredSymbol]',
 })
 export class RequiredSymbolDirective implements OnChanges {
+  /**
+   * Flag that is TRUE when control has Validators.required / Validators.requiredTrue, otherwise FALSE
+   */
   @Input() hasRequiredValidator = false;
+  /**
+   * Flag which allows display required symbol (*) manually
+   */
   @Input() isRequired?: boolean;
+  /**
+   * Flag that is TRUE when control is in disabled state, otherwise FALSE
+   */
   @Input() isDisabled?: boolean;
 
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+  constructor(private elementRef: ElementRef) {}
 
   ngOnChanges(): void {
     let displayRequiredSymbol = false;

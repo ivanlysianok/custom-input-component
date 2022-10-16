@@ -4,7 +4,7 @@
   border: 1px solid $_black-200;
   border-radius: 8px;
   padding: 13px 16px;
-  @include set-font($_input-size, 500, $_black);
+  @include set-text-style($_input-size, 500, $_black);
   &:focus-within {
     border: 1px solid $_purple;
     box-shadow: 0px 0px 0px 3px $_purple-200;
@@ -18,10 +18,14 @@
 .input {
   outline: none;
   border: none;
-  @include set-font($_input-size, 500, $_black);
+  @include set-text-style($_input-size, 500, $_black);
   &::placeholder {
-    @include set-font($_input-size, 400, $_black-600);
+    @include set-text-style($_input-size, 400, $_black-600);
   }
+}
+
+.disabled {
+  color: $_black-400 !important;
 }
 
 .email-icon {

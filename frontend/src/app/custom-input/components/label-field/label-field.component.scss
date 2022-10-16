@@ -1,7 +1,7 @@
 @import "../../../shared/styles/base.scss";
 
 .label {
-  @include set-font($_label-size, 500, $_black);
+  @include set-text-style($_label-size, 500, $_black);
 }
 
 .required {

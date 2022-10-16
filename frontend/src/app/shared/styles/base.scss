@@ -1,3 +1,23 @@
-@import "./colors.scss";
-@import "./controls.scss";
-@import "./sizings.scss";
+/* Colors */
+
+$_black: #000000;
+$_black-600: rgba(0, 0, 0, 0.6);
+$_black-400: rgba(0, 0, 0, 0.4);
+$_black-200: rgba(0, 0, 0, 0.2);
+$_black-20: rgba(0, 0, 0, 0.02);
+$_purple: #9f87ff;
+$_purple-200: rgba(159, 135, 255, 0.2);
+$_red: #e30000;
+$_red-200: rgba(227, 0, 0, 0.2);
+
+/* Fonts */
+
+$_add-text-size: 12px;
+$_label-size: 14px;
+$_input-size: 16px;
+
+@mixin set-text-style($size, $weight, $color) {
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+}
