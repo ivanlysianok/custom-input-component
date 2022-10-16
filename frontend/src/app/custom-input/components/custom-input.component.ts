@@ -94,7 +94,6 @@ export class CustomInputComponent implements ControlValueAccessor {
     if (!this.input) {
       return;
     }
-    console.log(this.control);
     this.value = this.input.nativeElement.value;
     this.onChange(this.value);
   }
