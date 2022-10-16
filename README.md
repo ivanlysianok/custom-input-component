@@ -53,7 +53,7 @@ export class AppComponent {
    placeholderText="This is placeholder"
    labelText="This is input label"
   ></custom-input>
- </form>
+</form>
 ```
 
 ### Features
