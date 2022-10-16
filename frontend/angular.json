@@ -31,8 +31,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "src/app/shared/styles/fonts.scss"
+              "src/styles.scss"
             ],
             "scripts": []
           },

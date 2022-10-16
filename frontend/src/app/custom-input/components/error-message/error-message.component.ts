@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { ValidationErrors } from '@angular/forms';
+import { ERROR_MESSAGES } from '../../constants/error-message.constant';
 import { Errors } from '../../models/errors.interface';
 
 @Component({
@@ -8,8 +9,18 @@ import { Errors } from '../../models/errors.interface';
   styleUrls: ['./error-message.component.scss'],
 })
 export class ErrorMessageComponent implements OnChanges {
+  /**
+   * Control errors
+   */
   @Input() validationErrors: ValidationErrors | null | undefined;
+  /**
+   * Custom error message. When presented, built in errors are not displayed
+   */
+  @Input() customErrorMessage?: string;
 
+  /**
+   * Errors collection
+   */
   public errors: Errors[] = [];
 
   ngOnChanges(): void {
@@ -17,49 +28,57 @@ export class ErrorMessageComponent implements OnChanges {
     if (!this.validationErrors) {
       return;
     }
+    this.customErrorMessage
+      ? this.addError('custom-err', this.customErrorMessage)
+      : this.getValidationErrors();
+  }
+
+  getValidationErrors(): void {
     for (let err in this.validationErrors) {
       if (err === 'required') {
-        this.addError(err, `This field is required`);
+        this.addError(err, ERROR_MESSAGES.REQUIRED);
       }
       if (err === 'requiredTrue') {
-        this.addError(err, `This field requires true value`);
+        this.addError(err, ERROR_MESSAGES.REQUIRED_TRUE);
       }
       if (err === 'minlength') {
         this.addError(
           err,
-          `The minimum length of field should be ${this.validationErrors[err].requiredLength}`
+          `${ERROR_MESSAGES.MIN_LENGTH} ${this.validationErrors[err].requiredLength}`
         );
       }
       if (err === 'maxlength') {
         this.addError(
           err,
-          `The maximum length of field should be ${this.validationErrors[err].requiredLength}`
+          `${ERROR_MESSAGES.MAX_LENGTH} ${this.validationErrors[err].requiredLength}`
         );
       }
       if (err === 'min') {
         this.addError(
           err,
-          `The minimum length of field should be ${this.validationErrors[err].min}`
+          `${ERROR_MESSAGES.MIN} ${this.validationErrors[err].min}`
         );
       }
       if (err === 'max') {
         this.addError(
           err,
-          `The maximum length of field should be ${this.validationErrors[err].max}`
+          `${ERROR_MESSAGES.MAX} ${this.validationErrors[err].max}`
         );
       }
       if (err === 'email') {
-        this.addError(
-          err,
-          `Fill this field in format: namesurname@example.com`
-        );
+        this.addError(err, ERROR_MESSAGES.EMAIL);
       }
       if (err === 'pattern') {
-        this.addError(err, `This field does not meet some requirements`);
+        this.addError(err, ERROR_MESSAGES.PATTERN);
       }
     }
   }
 
+  /**
+   * Adding specific error to @see{@link this.errors} collection
+   * @param errorKey Error key
+   * @param message Error message
+   */
   addError(errorKey: string, message: string): void {
     this.errors.push({
       key: errorKey,

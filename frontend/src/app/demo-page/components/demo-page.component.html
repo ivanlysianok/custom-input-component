@@ -1,11 +1,175 @@
-<div class="container">
-  <h1>Hello</h1>
-  <form [formGroup]="demoGroup">
+<div class="container my-4">
+  <h1>Custom form input component</h1>
+  <p>
+    This demo lets you preview the form input component, its variations, options
+    and different states.
+  </p>
+  <div class="card mb-4">
+    <div class="card-body">
+      <h6 class="card-title mb-2">Basic</h6>
+      <form [formGroup]="formGroup1">
+        <custom-input formControlName="formField"></custom-input>
+      </form>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h6 class="card-title mb-2">Label & Placeholder</h6>
+      <form [formGroup]="formGroup2">
+        <custom-input
+          formControlName="formField"
+          placeholderText="This is placeholder"
+          labelText="Input label"
+        ></custom-input>
+      </form>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h6 class="card-title mb-2">Input type - email</h6>
+      <form [formGroup]="formGroup3">
+        <custom-input
+          formControlName="formField"
+          placeholderText="Type your email in format name@example.com"
+          labelText="Input label"
+          inputType="email"
+        ></custom-input>
+      </form>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h6 class="card-title mb-2">Input type - number</h6>
+      <form [formGroup]="formGroup4">
+        <custom-input
+          formControlName="formField"
+          placeholderText="Type your phone number"
+          labelText="Input label"
+          inputType="number"
+        ></custom-input>
+      </form>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h6 class="card-title mb-2">Required</h6>
+      <form [formGroup]="formGroup5">
+        <custom-input
+          formControlName="formField"
+          placeholderText="This input needs to be filled"
+          labelText="Input label"
+        ></custom-input>
+      </form>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h6 class="card-title mb-2">Disabled</h6>
+      <form [formGroup]="formGroup6">
+        <custom-input
+          formControlName="formField"
+          placeholderText="This input is in disabled state"
+          labelText="Input label"
+        ></custom-input>
+      </form>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h6 class="card-title mb-2">Filled</h6>
+      <form [formGroup]="formGroup7">
+        <custom-input
+          formControlName="formField"
+          labelText="Input label"
+        ></custom-input>
+      </form>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h6 class="card-title mb-2">Invalid - built in errors</h6>
+      <form [formGroup]="formGroup8">
+        <custom-input
+          formControlName="formField"
+          placeholderText="This input needs to be filled with at least 10 symbols"
+          labelText="Input label"
+        ></custom-input>
+      </form>
+    </div>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h6 class="card-title mb-2">Invalid - custom message</h6>
+      <form [formGroup]="formGroup9">
+        <custom-input
+          formControlName="formField"
+          placeholderText="This input has regular expression for letters only"
+          labelText="Input label"
+          customErrorMessage="This is custom error message"
+        ></custom-input>
+      </form>
+    </div>
+  </div>
+
+  <h2>Playground</h2>
+  <p>Here you can try all the functionality by yourself.</p>
+
+  <form [formGroup]="formGroup10">
     <custom-input
-      labelText="Demo field"
-      placeholderText="Type here your data"
-      formControlName="demoField"
+      formControlName="formField"
+      placeholderText="Placeholder text"
+      labelText="Input label"
     ></custom-input>
-    <button class="btn btn-primary" (click)="getValue()">Get value</button>
+
+    <div class="mt-4">
+      <button
+        class="demo-button btn btn-primary me-2 mb-2 mb-md-0"
+        (click)="getValue()"
+      >
+        Get value
+      </button>
+      <button
+        class="demo-button btn btn-secondary me-2 mb-2 mb-md-0"
+        (click)="patchValue()"
+      >
+        Patch value
+      </button>
+      <button
+        class="demo-button btn btn-primary me-2 mb-2 mb-md-0"
+        (click)="disable()"
+      >
+        Disable
+      </button>
+      <button
+        class="demo-button btn btn-secondary me-2 mb-2 mb-md-0"
+        (click)="enable()"
+      >
+        Enable
+      </button>
+      <button
+        class="demo-button btn btn-primary me-2 mb-2 mb-md-0"
+        (click)="addValidation()"
+      >
+        Add validation
+      </button>
+      <button
+        class="demo-button btn btn-secondary me-2 mb-2 mb-md-0"
+        (click)="removeValidation()"
+      >
+        Remove validation
+      </button>
+    </div>
+
+    <div *ngIf="value" class="mt-2">
+      <p><strong>Value: </strong> {{ value }}</p>
+    </div>
   </form>
 </div>

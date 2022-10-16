@@ -1,10 +1,7 @@
 import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ElementRef,
   Input,
-  OnInit,
   Renderer2,
   ViewChild,
 } from '@angular/core';
@@ -33,6 +30,10 @@ export class CustomInputComponent implements ControlValueAccessor {
    * Flag which allows set required state manually and display required symbol (*)
    */
   @Input() isRequired?: boolean;
+  /**
+   * Custom error message that will be displayed in @see{@link ErrorMessageComponent}
+   */
+  @Input() customErrorMessage?: string;
   /**
    * Setter for @see{@link isDisabled} property
    */
@@ -80,12 +81,20 @@ export class CustomInputComponent implements ControlValueAccessor {
   }
 
   /**
+   * Getter for abstract control
+   */
+  public get control() {
+    return this.ngControl.control;
+  }
+
+  /**
    * Fired when control value changed
    */
   public onValueChange(): void {
     if (!this.input) {
       return;
     }
+    console.log(this.control);
     this.value = this.input.nativeElement.value;
     this.onChange(this.value);
   }
@@ -98,16 +107,16 @@ export class CustomInputComponent implements ControlValueAccessor {
   }
 
   /**
-   * Checks if control has required validators.
+   * Checks if control has required / requiredTrue validators.
    * @returns TRUE if has, otherwise FALSE
    */
-  hasRequiredValidator(): boolean {
-    if (!this.ngControl.control) {
+  hasRequiredValidators(): boolean {
+    if (!this.control) {
       return false;
     }
     return (
-      this.ngControl.control.hasValidator(Validators.required) ||
-      this.ngControl.control.hasValidator(Validators.requiredTrue)
+      this.control.hasValidator(Validators.required) ||
+      this.control.hasValidator(Validators.requiredTrue)
     );
   }
 }

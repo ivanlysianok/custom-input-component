@@ -1,12 +1,6 @@
 @import "./sizings.scss";
 @import "./colors.scss";
 
-@mixin set-font($size, $weight, $color) {
-  font-size: $size;
-  font-weight: $weight;
-  color: $color;
-}
-
 .disabled {
   color: $_black-400 !important;
 }

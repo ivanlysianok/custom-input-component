@@ -3,14 +3,12 @@
     [text]="labelText"
     [isRequired]="isRequired"
     [isDisabled]="isDisabled"
-    [hasRequiredValidator]="hasRequiredValidator()"
+    [hasRequiredValidator]="hasRequiredValidators()"
   >
     <div
-      class="input-container in-row mt-2"
+      class="input-container d-flex align-items-center mt-2"
       [ngClass]="{
-        'error-bg':
-          (ngControl.control?.touched || ngControl.control?.dirty) &&
-          ngControl.control?.errors
+        'error-border': control && control.invalid && control.touched
       }"
     >
       <ng-container
@@ -20,15 +18,14 @@
         <img
           [src]="'assets/images/' + inputType + '.svg'"
           [ngClass]="{
-            'opacity-50': isDisabled,
-            'email-icon': inputType === 'email',
-            'phone-icon': inputType === 'number'
+            'opacity-50': isDisabled
           }"
+          [class]="inputType + '-icon me-2'"
         />
       </ng-container>
       <input
         #input
-        class="input"
+        class="input w-100"
         [ngClass]="{ disabled: isDisabled }"
         [placeholder]="placeholderText"
         [type]="inputType"
@@ -38,7 +35,8 @@
     </div>
   </label-field>
   <error-message
-    *ngIf="ngControl.control?.touched || ngControl.control?.dirty"
-    [validationErrors]="ngControl.control?.errors"
+    *ngIf="control && control.invalid && control.touched"
+    [validationErrors]="control.errors"
+    [customErrorMessage]="customErrorMessage"
   ></error-message>
 </div>
