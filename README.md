@@ -60,4 +60,4 @@ export class AppComponent {
 - [X] Compatible with Reactive & Template driven forms
 - [X] Compatible with built-in & custom validators
 - [X] Customizable & reusable code
-- [X] Handle validation errors (predefined error messages for all build in validators)
+- [X] Handle validation errors (predefined error messages for all built-in validators)
