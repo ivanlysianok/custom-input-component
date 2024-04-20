@@ -56,7 +56,7 @@ export class AppComponent {
 </form>
 ```
 
-### Features
+### Feature
 - [X] Compatible with Reactive & Template driven forms
 - [X] Compatible with built-in & custom validators
 - [X] Customizable & reusable code
